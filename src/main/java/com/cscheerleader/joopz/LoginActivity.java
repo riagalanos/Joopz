@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private EditText input_email, input_password;
-    private Button button_create_account, button_login;
+    private Button button_create_account, button_login, button_reset_password;
     private String email, password;
 
     @Override
@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         input_password = (EditText) findViewById(com.cscheerleader.joopz.R.id.input_password);
         button_create_account = (Button) findViewById(com.cscheerleader.joopz.R.id.button_create_account);
         button_login = (Button)findViewById(R.id.button_login);
+        button_reset_password = (Button)findViewById(R.id.button_reset_password);
         mAuth = FirebaseAuth.getInstance();
 
         // Hide ActionBar
@@ -112,6 +113,31 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
 
+            }
+        });
+
+        button_reset_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                email = input_email.getText().toString().trim();
+
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(getApplication(), "Enter your email", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                mAuth.sendPasswordResetEmail(email)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(LoginActivity.this, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
             }
         });
 
