@@ -5,4 +5,6 @@
     <string name="button_create_account">Create account</string>
     <string name="email">Email</string>
     <string name="hint_password">Password</string>
+    <string name="minimum_password">Password is at least 6 characters.</string>
+    <string name="auth_failed">Authentication failed, check email and/or password or create account.</string>
     </resources>
