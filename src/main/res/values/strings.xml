@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Joopz</string>
+    <string name="login">Login</string>
+    <string name="button_forgot_password">Forgot password?</string>
+    <string name="button_create_account">Create account</string>
+    <string name="email">Email</string>
+    <string name="hint_password">Password</string>
+    </resources>
