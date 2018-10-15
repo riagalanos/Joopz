@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import groovy.lang.GroovyShell;
+import groovy.util.Eval;
+
 //import bsh.Interpreter;
 //import org.joor.Reflect;
 //import java.util.function.Supplier;
@@ -32,6 +35,12 @@ public class ChallengeActivity extends AppCompatActivity {
         result = (TextView) findViewById(R.id.result);
         button_compile = (Button) findViewById(R.id.button_compile);
 
+        try {
+            GroovyShell shell = new GroovyShell();
+            shell.evaluate("3*5");
+            Log.v("MMMMMMMMMMMMMMM", "this happened?");
+        }
+        catch(Exception e){Log.v("NNNNNNNOOOOOOOOOO", "boo");}
         //interpreter = new Interpreter();
         /*button_compile.setOnClickListener(new View.OnClickListener() {
             @Override

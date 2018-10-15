@@ -1,12 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'groovyx.android'
+
 
 android {
     compileSdkVersion 28
     defaultConfig {
         applicationId 'com.cscheerleader.joopz'
-        minSdkVersion 22
-        targetSdkVersion 28
+        minSdkVersion 26
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -34,7 +36,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.4'
     //implementation 'com.github.jOOQ:jOOR:version-0.9.8'
     //implementation 'org.beanshell:bsh:2.0b5'
-    implementation 'org.apache-extras.beanshell:bsh:2.0b6'
-
-
+    //implementation 'org.apache-extras.beanshell:bsh:2.0b6'
+    implementation 'org.codehaus.groovy:groovy:2.4.12:grooid'
 }
