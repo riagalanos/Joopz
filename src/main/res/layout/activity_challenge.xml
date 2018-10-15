@@ -13,11 +13,16 @@
         android:layout_height="wrap_content"
         android:text="@string/header"/>
 
-    <TextView
+    <EditText
         android:id="@+id/incomplete_loop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/incomplete_loop"/>
+
+    <!--<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/instructions"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -82,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
-
+    -->
     <Button
         android:id="@+id/button_compile"
         android:layout_width="match_parent"
