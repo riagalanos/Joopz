@@ -15,6 +15,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,11 +33,15 @@ public class ChallengeActivity extends AppCompatActivity {
     private String init;
     private String condition_termination;
     private String increment;
+    private Challenge active_problem;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge);
+
+        active_problem = (Challenge) (getIntent().getSerializableExtra("Challenge"));//null
 
         incomplete_loop = (EditText) findViewById(R.id.incomplete_loop);
         //start_value = (EditText) findViewById(R.id.start_value);
@@ -47,15 +53,12 @@ public class ChallengeActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         url = "https://joopz.sites.tjhsst.edu";
 
-        loop = "test";
-        expected_output = "5 6 7 8";
-        init = "5";
-        condition_termination = "12";
-        increment = "i+";
+        loop = active_problem.getLoop();
+        expected_output = active_problem.getExpected();
+        init = "" + active_problem.getInitialization();
+        condition_termination = "" + active_problem.getBound();
+        increment = active_problem.getIteration();
 
-        //hardcode an entry for database
-        //put entry in database
-        //retrieve an item
         //populate the edittext
         //have try it button pass to volley
         //back up everything
@@ -75,8 +78,7 @@ public class ChallengeActivity extends AppCompatActivity {
                     }
         }) {
             @Override
-            protected Map<String, String> getParams()
-            {
+            protected Map<String, String> getParams(){
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("loop",loop);
                 params.put("expected_output", expected_output);
@@ -89,7 +91,6 @@ public class ChallengeActivity extends AppCompatActivity {
         };
 
         queue.add(putRequest);
-
     }
 }
 

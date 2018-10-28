@@ -1,8 +1,9 @@
 package com.cscheerleader.joopz;
 
-public class Challenge {
+import java.io.Serializable;
 
-    private static int challenge_number;
+public class Challenge implements Serializable {
+
     private int mTimesSolved;
     private String mLoop;
     private String mExpected;
@@ -10,7 +11,7 @@ public class Challenge {
     private int mBound;
     private String mIteration;
 
-    private Challenge( String loopy, String output, int init, int bd, String iter){
+    public Challenge( String loopy, String output, int init, int bd, String iter){
         mLoop = loopy;
         mExpected = output;
         mInitialization = init;
@@ -18,9 +19,9 @@ public class Challenge {
         mIteration = iter;
     }
 
-    public static int getChallenge_number() {
-        return challenge_number;
+    public Challenge( ){
     }
+
 
     public int getTimesSolved() {
         return mTimesSolved;
@@ -46,4 +47,27 @@ public class Challenge {
         return mIteration;
     }
 
+    public void setTimesSolved(int timesSolved) {
+        mTimesSolved = timesSolved;
+    }
+
+    public void setLoop(String loop) {
+        mLoop = loop;
+    }
+
+    public void setExpected(String expected) {
+        mExpected = expected;
+    }
+
+    public void setInitialization(int initialization) {
+        mInitialization = initialization;
+    }
+
+    public void setBound(int bound) {
+        mBound = bound;
+    }
+
+    public void setIteration(String iteration) {
+        mIteration = iteration;
+    }
 }
