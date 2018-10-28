@@ -8,20 +8,29 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import groovy.lang.GroovyShell;
-import groovy.util.Eval;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
-//import bsh.Interpreter;
-//import org.joor.Reflect;
-//import java.util.function.Supplier;
-//import javax.tools.JavaCompiler;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChallengeActivity extends AppCompatActivity {
 
     private TextView result;
     private EditText incomplete_loop, start_value, condition_operator, condition_value, value_change;
-    //private Interpreter interpreter;
     private Button button_compile;
+    private String url;
+    private RequestQueue queue;
+    private StringRequest stringRequest;
+    private String loop;
+    private String expected_output;
+    private String init;
+    private String condition_termination;
+    private String increment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,85 +44,52 @@ public class ChallengeActivity extends AppCompatActivity {
         result = (TextView) findViewById(R.id.result);
         button_compile = (Button) findViewById(R.id.button_compile);
 
-        try {
-            GroovyShell shell = new GroovyShell();
-            shell.evaluate("3*5");
-            Log.v("MMMMMMMMMMMMMMM", "this happened?");
-        }
-        catch(Exception e){Log.v("NNNNNNNOOOOOOOOOO", "boo");}
-        //interpreter = new Interpreter();
-        /*button_compile.setOnClickListener(new View.OnClickListener() {
+        queue = Volley.newRequestQueue(this);
+        url = "https://joopz.sites.tjhsst.edu";
+
+        loop = "test";
+        expected_output = "5 6 7 8";
+        init = "5";
+        condition_termination = "12";
+        increment = "i+";
+
+        //hardcode an entry for database
+        //put entry in database
+        //retrieve an item
+        //populate the edittext
+        //have try it button pass to volley
+        //back up everything
+
+        StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        result.setText("Put response is: " + response.substring(0));
+                    }
+                }, new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        result.setText("Galanos - the error is: " + error);
+                    }
+        }) {
             @Override
-            public void onClick(View view) {
-                try {
-                    interpreter.set("myapp", ChallengeActivity.this); //a reference to activity
-                    interpreter.set("code", incomplete_loop);
-                    interpreter.set("button", button_compile);
-                    result.setText("bob" + interpreter.eval(incomplete_loop.getText().toString()));
-                    Log.v("MMMMMMMMMM", ""+interpreter.eval(incomplete_loop.getText().toString()));
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("loop",loop);
+                params.put("expected_output", expected_output);
+                params.put("initialization", init);
+                params.put("condition_bound", condition_termination);
+                params.put("iteration", increment);
 
-                }
-                catch(Exception e){}
-
+                return params;
             }
-        });*/
-        //String loop = "for int i = init_value; i < upper_bound; increment \n" +
-        //       "\tSystem.out.println(i); \n";
-        //String expected_output = "5 6 7 8";
-        //displayProblem(loop, expected_output);
+        };
+
+        queue.add(putRequest);
+
     }
-
-
-
-    /*public void displayProblem(String problem, String expected_result) {
-
-        //System.out.println("For the loop below --> \n");
-        //System.out.println(problem);
-
-        //incomplete_loop.setText(problem + "and\n" + expected_result);
-
-        //System.out.println("With output --> \n");
-        //System.out.println(expected_result);
-        //System.out.println();
-        //System.out.print("Enter init_value: ");
-        String init = start_value.getText().toString();
-        //System.out.print("Enter upper_bound: ");
-        String condition_termination = condition_value.getText().toString();
-        //System.out.print("Enter increment statement: ");
-        String increment_statement = value_change.getText().toString();
-
-        //result.setText(test(init, condition_termination, increment_statement));
-    }
-
-    /*public String test(String init, String condition_termination, String increment_statement) {
-        try{
-            //basic example was from https://blog.jooq.org/2018/04/03/how-to-compile-a-class-at-runtime-with-java-8-and-9/
-            Supplier<String> supplier = Reflect.compile(
-                    "com.example.CompileTest",
-                    "package com.example;\n" +
-                            "class CompileTest\n" +
-                            "implements java.util.function.Supplier<String> {\n" +
-                            "  public String get() {\n" +
-                            "    String str=\"\";\n " +
-                            "    for (int i=" + init + "; i <" + condition_termination + "; " + increment_statement + "){\n" +
-                            "       str+=i;\n"  +
-                            "       str+=\" \";\n" +
-                            "    }\n" +
-                            "    return str;\n" +
-                            "  }\n" +
-                            "}\n"
-            ).create().get();
-            String output = supplier.get();
-            return output;
-        }
-        catch(Exception e){
-            String message = e.toString();
-            if (message.contains("Compilation"))
-                return "Compilation error";
-            return e.toString();
-        }
-
-
-    }*/
-
 }
+
