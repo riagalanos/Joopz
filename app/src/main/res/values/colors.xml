@@ -6,12 +6,19 @@
     <color name="primaryColor">#FFC107</color>
     <color name="primaryColorDark">#FFA000</color>
     <color name="backgroundColor">#FCFCFC</color>
-    <color name="lightGrayLine">#EDEDED</color>
+    <color name="lightGray">#EDEDED</color>
     <color name="deepPurple">#7C4DFF</color>
     <color name="materialYellow">#FFB300</color>
     <color name="materialGreen">#00BFA5</color>
     <color name="pinkAccent">#FF4081</color>
-    <color name="logoColor">#A1CAF1</color>
+    <color name="joopzBlue">#A1CAF1</color>
     <color name="darkGray"></color>
+    <color name="colorPrimaryAlternate">#FFC107</color>
+    <color name="colorPrimaryDarkAlternate">#FFA000</color>
+    <color name="darkBlue">#23283a</color>
+    <color name="testColorBlue">#152b38</color>
+    <color name="pink">#fe104d</color>
+    <color name="blackOverlay">#66000000</color>
+
 </resources>
 

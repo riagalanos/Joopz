@@ -10,13 +10,17 @@ public class Challenge implements Serializable {
     private int mInitialization;
     private int mBound;
     private String mIteration;
+    private String mType;
+    private boolean mSolved;
 
-    public Challenge( String loopy, String output, int init, int bd, String iter){
+    public Challenge( String typ, String loopy, String output, int init, int bd, String iter){
+        mType = typ;
         mLoop = loopy;
         mExpected = output;
         mInitialization = init;
         mBound = bd;
         mIteration = iter;
+        mSolved = false;
     }
 
     public Challenge( ){
@@ -47,6 +51,14 @@ public class Challenge implements Serializable {
         return mIteration;
     }
 
+    public String getType() {
+        return mType;
+    }
+
+    public boolean isSolved() {
+        return mSolved;
+    }
+
     public void setTimesSolved(int timesSolved) {
         mTimesSolved = timesSolved;
     }
@@ -69,5 +81,13 @@ public class Challenge implements Serializable {
 
     public void setIteration(String iteration) {
         mIteration = iteration;
+    }
+
+    public void setType(String type) {
+        mType = type;
+    }
+
+    public void setSolved(boolean solved) {
+        mSolved = solved;
     }
 }

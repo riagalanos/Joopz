@@ -7,7 +7,14 @@
     <string name="hint_password">Password</string>
     <string name="minimum_password">Password is at least 6 characters.</string>
     <string name="auth_failed">Authentication failed, check email and/or password or create account.</string>
+    <string name="dashboard_option1">For\nLoops</string>
+    <string name="dashboard_option2">While\nLoops</string>
+    <string name="dashboard_option3">Nested\nLoops</string>
+    <string name="dashboard_option4">2-D Array\nTraversals</string>
+    <string name="add">Add Challenge</string>
+    <string name="solved">solved</string>
     <string name="header">Challenge #</string>
+    <string name="solve_button">Solve Challenge </string>
     <string name="incomplete_loop"></string>
     <string name="start_value">Start value: </string>
     <string name="condition_operator">Condition operator: </string>
@@ -15,7 +22,7 @@
     <string name="value_change">Value change: </string>
     <string name="button_execute">TRY IT</string>
     <string name="result"></string>
-    <string name="get_problem">GET PROBLEMO</string>
+    <string name="get_problem">GET PROBLEM</string>
     <string name="instructions"></string>
 
 </resources>

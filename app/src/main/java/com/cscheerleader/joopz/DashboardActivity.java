@@ -5,9 +5,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -22,16 +24,26 @@ import java.util.Map;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    private Button button_get_problem;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private DatabaseReference challengesRef;
     private ArrayList<Challenge> myCollection;
+    private ArrayList<Challenge> forLoops, whileLoops, nestedLoops, twoDTravs;
+    private CardView forCard, whileCard, nestedCard, twoDCard;
+    private int forNumSolved, whileNumSolved, nestedNumSolved, twoDNumSolved;
+    private TextView forSolved;
+    private Button add;
+    private boolean flag;
+
+    // how to populate database
+    // how to retrieve in time
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.cscheerleader.joopz.R.layout.activity_dashboard);
+
+        flag=false;
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
@@ -39,25 +51,29 @@ public class DashboardActivity extends AppCompatActivity {
 
         myCollection = new ArrayList<Challenge>();
 
-        button_get_problem = (Button)findViewById(R.id.get_problem);
+        forCard = (CardView)findViewById(R.id.for_card);
+        whileCard = (CardView)findViewById(R.id.while_card);
+        nestedCard = (CardView)findViewById(R.id.nested_card);
+        twoDCard = (CardView)findViewById(R.id.twoD_card);
 
-        Map<String, Challenge> challenges = new HashMap<String, Challenge>();
-        challenges.put("1", new Challenge("test", "5 6 7 8 9 10", 5, 10, "i++"));
-        challenges.put("2", new Challenge("test", "4 6 8", 4, 8, "i+=2"));
+        add = (Button)findViewById(R.id.add_button);
 
-        challengesRef.setValue(challenges);
+        forSolved = (TextView)findViewById(R.id.for_solved);
 
         challengesRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 myCollection.add(dataSnapshot.getValue(Challenge.class)); //not retrieving from database
-                Log.v("MMMMMMMMMMMMMMM", "" + myCollection.get(0).getBound());
+                //Log.v("MMMMMMMMMMMMMMM", "" + myCollection.get(0).getBound());
+                forNumSolved = createSubListAndCountSolved("for");
+                forSolved.setText("" + forNumSolved + "/" + forLoops.size() + " " + forSolved.getText());
+                Log.v("XXXXXXXXXXX", ""+myCollection.size());
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 myCollection.add(dataSnapshot.getValue(Challenge.class));
-                Log.v("PPPPPPPPPPPPPPP", "changed is happening");
+                Log.v("WWWWWWWWWWWWWWW", "changed is happening");
             }
 
             @Override
@@ -73,17 +89,108 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        button_get_problem.setOnClickListener(new View.OnClickListener() {
+        //forNumSolved = createSubListAndCountSolved("for");
+        //forSolved.setText("" + forNumSolved + "/" + forLoops.size() + " " + forSolved.getText());
+
+        // DashboardActivity pulls from firebase
+        // if add challenge button is pressed, AddChallengeActivity opened
+        // AddChallengeActivity adds to Firebase, doesn't need to retrieve
+
+        forCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Challenge active_problem = myCollection.get( (int)(Math.random()*2));
-                Log.v("XXXXXXXXXXXX", "" + active_problem.getBound());
-                Intent i = new Intent(DashboardActivity.this, ChallengeActivity.class);
-                i.putExtra("Challenge", active_problem);
+                //sends the list with just for loops to ProblemChooserActivity
+                Intent i = new Intent(DashboardActivity.this, ProblemChooserActivity.class);
+                i.putExtra("List",forLoops);
+                startActivity(i);
+            }
+        });
+
+        whileCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //sends the list with just while loops to ProblemChooserActivity
+                Intent i = new Intent(DashboardActivity.this, ProblemChooserActivity.class);
+                i.putExtra("List",whileLoops);
+                startActivity(i);
+            }
+        });
+
+        nestedCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //sends the list with just nested loops to ProblemChooserActivity
+                Intent i = new Intent(DashboardActivity.this, ProblemChooserActivity.class);
+                i.putExtra("List",nestedLoops);
+                startActivity(i);
+            }
+        });
+
+        twoDCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //sends the list with just 2D array traversals to ProblemChooserActivity
+                Intent i = new Intent(DashboardActivity.this, ProblemChooserActivity.class);
+                i.putExtra("List",twoDTravs);
+                startActivity(i);
+            }
+        });
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(DashboardActivity.this, AddChallengeActivity.class);
                 startActivity(i);
             }
         });
 
 
+    }
+
+    // helper method
+    public int createSubListAndCountSolved (String type) {
+        Log.v("BBBBBBBBBBBBBB", ""+myCollection.size());
+        int count = 0;
+        if (type.equals("for")){
+            forLoops = new ArrayList<Challenge>();
+            for (Challenge val: myCollection) {
+                if (val.getType().equals(type)) {
+                    forLoops.add(val);
+                    if (val.isSolved())
+                        count++;
+                }
+            }
+        }
+        else if (type.equals("while")){
+            whileLoops = new ArrayList<Challenge>();
+            for (Challenge val : myCollection) {
+                if (val.getType().equals(type)) {
+                    whileLoops.add(val);
+                    if (val.isSolved())
+                        count++;
+                }
+            }
+        }
+        else if (type.equals("nested")){
+            nestedLoops = new ArrayList<Challenge>();
+            for (Challenge val : myCollection) {
+                if (val.getType().equals(type)) {
+                    nestedLoops.add(val);
+                    if (val.isSolved())
+                        count++;
+                }
+            }
+        }
+        else if (type.equals("twoD")){
+            twoDTravs = new ArrayList<Challenge>();
+            for (Challenge val : myCollection) {
+                if (val.getType().equals(type)) {
+                    twoDTravs.add(val);
+                    if (val.isSolved())
+                        count++;
+                }
+            }
+        }
+        return count;
     }
 }

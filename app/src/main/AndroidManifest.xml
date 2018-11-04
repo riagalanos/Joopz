@@ -22,6 +22,10 @@
         </activity>
         <activity android:name=".ChallengeActivity">
         </activity>
+        <activity android:name=".ProblemChooserActivity">
+        </activity>
+        <activity android:name=".AddChallengeActivity">
+        </activity>
     </application>
 
 </manifest>
