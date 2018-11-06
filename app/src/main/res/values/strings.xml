@@ -20,7 +20,11 @@
     <string name="condition_operator">Condition operator: </string>
     <string name="condition_value">Condition value: </string>
     <string name="value_change">Value change: </string>
-    <string name="button_execute">TRY IT</string>
+    <string name="message_expected">Expected Output</string>
+    <string name="expected_output"></string>
+    <string name="message_actual">Actual Output</string>
+    <string name="actual_output"></string>
+    <string name="button_execute">RUN CODE</string>
     <string name="result"></string>
     <string name="get_problem">GET PROBLEM</string>
     <string name="instructions"></string>

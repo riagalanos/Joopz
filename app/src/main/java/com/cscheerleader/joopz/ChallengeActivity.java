@@ -23,8 +23,8 @@ import java.util.Map;
 public class ChallengeActivity extends AppCompatActivity {
 
     private TextView result;
-    private EditText incomplete_loop, start_value, condition_operator, condition_value, value_change;
-    private Button button_compile;
+    private EditText loop_initialization, loop_bound, loop_iteration;
+    private Button button_execute;
     private String url;
     private RequestQueue queue;
     private StringRequest stringRequest;
@@ -35,29 +35,44 @@ public class ChallengeActivity extends AppCompatActivity {
     private String increment;
     private Challenge active_problem;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge);
 
-        active_problem = (Challenge) (getIntent().getSerializableExtra("Challenge"));//null
+        active_problem = (Challenge) (getIntent().getSerializableExtra("Challenge"));
+        //Log.v("FFFFFFFFFFF", active_problem.getLoop());
 
-        incomplete_loop = (EditText) findViewById(R.id.incomplete_loop);
+        loop_initialization = (EditText) findViewById(R.id.loop_initialization);
+        loop_bound = (EditText) findViewById(R.id.loop_bound);
+        loop_iteration = (EditText) findViewById(R.id.loop_iteration);
+
+        int first_stop = active_problem.getLoop().indexOf("@@");
+        int second_stop = active_problem.getLoop().indexOf("$$");
+        int third_stop = active_problem.getLoop().indexOf("##");
+
+        String first_part = active_problem.getLoop().substring(0, first_stop);
+        String second_part = active_problem.getLoop().substring(first_stop+3, second_stop);
+        //String third_part =
+        //String fourth_part =
+
+        loop_initialization.setText(first_part);
+        loop_bound.setText(second_part);
+
         //start_value = (EditText) findViewById(R.id.start_value);
         //condition_value = (EditText) findViewById(R.id.condition_value);
         //value_change = (EditText) findViewById(R.id.value_change);
         result = (TextView) findViewById(R.id.result);
-        button_compile = (Button) findViewById(R.id.button_compile);
+        button_execute = (Button) findViewById(R.id.button_execute);
 
         queue = Volley.newRequestQueue(this);
         url = "https://joopz.sites.tjhsst.edu";
 
         loop = active_problem.getLoop();
         expected_output = active_problem.getExpected();
-        init = "" + active_problem.getInitialization();
-        condition_termination = "" + active_problem.getBound();
-        increment = active_problem.getIteration();
+        init = "";//"" + active_problem.getInitialization();
+        condition_termination = ""; // "" + active_problem.getBound();
+        increment = ""; //active_problem.getIteration();
 
         //populate the edittext
         //have try it button pass to volley

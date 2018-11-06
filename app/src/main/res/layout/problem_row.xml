@@ -15,7 +15,9 @@
             android:id="@+id/problemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10dp"/>
+            android:layout_marginBottom="15dp"
+            android:textStyle="bold"
+            android:textSize="16dp"/>
 
         <!--<ImageView></ImageView>-->
 
@@ -24,9 +26,12 @@
     <Button
         android:padding="2dp"
         android:text="@string/solve_button"
+        android:textSize="16dp"
         android:textColor="@color/backgroundColor"
         android:background="@color/joopzBlue"
         android:textAllCaps="false"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_height="match_parent"
         android:layout_width="match_parent"/>
 

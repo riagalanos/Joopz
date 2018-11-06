@@ -3,21 +3,94 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:layout_gravity="center_horizontal"
     android:padding="@dimen/activity_horizontal_margin"
     android:background="@color/backgroundColor">
 
     <TextView
         android:id="@+id/header"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:text="@string/header"/>
 
-    <EditText
-        android:id="@+id/incomplete_loop"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/incomplete_loop"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/loop_first_part"
+            android:background="@color/lightGray"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text=""/>
+
+        <EditText
+            android:id="@+id/loop_initialization"
+            android:background="@color/joopzBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/incomplete_loop"/>
+
+        <TextView
+            android:id="@+id/loop_second_part"
+            android:background="@color/lightGray"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text=""/>
+
+        <EditText
+            android:id="@+id/loop_bound"
+            android:background="@color/lightGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/loop_iteration"
+            android:background="@color/lightGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="@string/message_expected"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:background="@color/lightGray"
+        android:layout_height="30dp"
+        android:text="@string/expected_output"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="@string/message_actual"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:background="@color/lightGray"
+        android:layout_height="30dp"
+        android:text="@string/actual_output"/>
+
+    <Button
+        android:id="@+id/button_execute"
+        android:layout_width="wrap_content"
+        android:background="@color/joopzBlue"
+        android:textColor="@color/backgroundColor"
+        android:layout_height="30dp"
+        android:text="@string/button_execute"/>
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/result"/>
+
+
+
+
 
     <!--<TextView
         android:layout_width="wrap_content"
@@ -88,17 +161,8 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
     -->
-    <Button
-        android:id="@+id/button_compile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_execute"/>
 
-    <TextView
-        android:id="@+id/result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/result"/>
+
 
 
 </LinearLayout>

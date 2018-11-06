@@ -66,7 +66,7 @@ public class DashboardActivity extends AppCompatActivity {
                 myCollection.add(dataSnapshot.getValue(Challenge.class)); //not retrieving from database
                 //Log.v("MMMMMMMMMMMMMMM", "" + myCollection.get(0).getBound());
                 forNumSolved = createSubListAndCountSolved("for");
-                forSolved.setText("" + forNumSolved + "/" + forLoops.size() + " " + forSolved.getText());
+                forSolved.setText("" + forNumSolved + "/" + forLoops.size() + " solved");
                 Log.v("XXXXXXXXXXX", ""+myCollection.size());
             }
 

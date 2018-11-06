@@ -46,11 +46,15 @@ public class AddChallengeActivity extends AppCompatActivity {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Challenge newChallenge = new Challenge("for", "test", "2 4 6", 4, 8, "i+=1");
-                //Map<String, Challenge> challenges = new HashMap<String, Challenge>();
-                //challenges.put("1", new Challenge("for", "test", "5 6 7 8 9 10", 5, 10, "i++"));
-                //challenges.put("2", new Challenge("for", "test", "4 6 8", 4, 8, "i+=2"));
-                challengesRef.child("4").setValue(newChallenge); // need to figure out how to know what num is next
+                /*Challenge newChallenge = new Challenge(3, "for", "test", "2 4 6", 4, 8, "i+=1");
+                Map<String, Challenge> challenges = new HashMap<String, Challenge>();
+                challenges.put("1", new Challenge(1, "for", "test", "5 6 7 8 9 10", 5, 10, "i++"));
+                challenges.put("2", new Challenge(2, "for", "test", "4 6 8", 4, 8, "i+=2"));
+                challengesRef.setValue(challenges);
+                challengesRef.child("3").setValue(newChallenge); // need to figure out how to know what num is next*/
+                Map<String, Challenge> challenges = new HashMap<String, Challenge>();
+                challenges.put("1", new Challenge(1, "for", "for (int i = @@; i < $$; ##)\\n\\tSystem.out.print( i * 3 + \" \");", "5 6 7 8 9 10"));
+                challengesRef.setValue(challenges);
             }
         });
 

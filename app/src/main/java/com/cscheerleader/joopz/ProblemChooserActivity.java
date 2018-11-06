@@ -39,8 +39,8 @@ public class ProblemChooserActivity extends AppCompatActivity implements MyRecyc
 
     @Override
     public void onItemClick (View view,int position){
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this, ChallengeActivity.class);
+        i.putExtra("Challenge", adapter.getItem(position));
         startActivity(i);
     }
 }
